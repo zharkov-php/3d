@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Repositories\EmployeeRepository;
+use App\Models\Employee;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class EmployeeController extends Controller
 {
@@ -20,5 +23,10 @@ class EmployeeController extends Controller
     public function index(): Collection
     {
         return $this->employeeRepository->all();
+    }
+
+    public function getEmployeeStatus(Employee $employee): Model|Collection|Builder|array|null
+    {
+        return $this->employeeRepository->getStatus($employee->id);
     }
 }

@@ -22,6 +22,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/employees', [EmployeeController::class, 'index']);
+
 Route::get('/machines', [MachineController::class, 'index']);
+
 Route::post('/assign/{employee}/{machine}', [WorkController::class, 'assignMachineToEmployee']);
 Route::post('/unassign/{employee}/{machine}', [WorkController::class, 'unassignMachineFromEmployee']);
+
+Route::get('/employee-status/{employee}', [EmployeeController::class, 'getEmployeeStatus']);
+Route::get('/machine-status/{machine}', [MachineController::class, 'getMachineStatus']);
