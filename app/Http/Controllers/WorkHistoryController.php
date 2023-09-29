@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Repositories\WorkHistoryRepository;
+use App\Http\Resources\WorkHistoryResourceCollection;
 use Illuminate\Http\JsonResponse;
 
 class WorkHistoryController extends Controller
@@ -22,6 +23,6 @@ class WorkHistoryController extends Controller
 
         $key = ($type === 'employee') ? 'employee_id' : 'machine_id';
 
-        return $this->workHistoryRepository->geHistory($key, $id);
+        return new WorkHistoryResourceCollection($this->workHistoryRepository->geHistory($key, $id));
     }
 }
