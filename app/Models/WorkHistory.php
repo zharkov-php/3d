@@ -10,7 +10,12 @@ class WorkHistory extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['employee_id', 'machine_id', 'started_at', 'ended_at'];
+    protected $fillable = [
+        'employee_id',
+        'machine_id',
+        'started_at',
+        'ended_at',
+        ];
 
     public function employee(): BelongsTo
     {

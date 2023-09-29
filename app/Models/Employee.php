@@ -10,10 +10,13 @@ class Employee extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'name',
+        ];
 
     public function machines(): BelongsToMany
     {
-        return $this->belongsToMany(Machine::class, 'employee_machine')->withTimestamps();
+        return $this->belongsToMany(Machine::class, 'employee_machine')
+            ->withTimestamps();
     }
 }
