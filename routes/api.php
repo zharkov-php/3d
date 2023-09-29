@@ -32,5 +32,5 @@ Route::post('/unassign/{employee}/{machine}', [WorkController::class, 'unassignM
 Route::get('/employee-status/{employee}', [EmployeeController::class, 'getEmployeeStatus']);
 Route::get('/machine-status/{machine}', [MachineController::class, 'getMachineStatus']);
 
-Route::get('/history/{type}/{id}', [WorkHistoryController::class, 'getHistory']);
+Route::get('/history', [WorkHistoryController::class, 'getHistory']);
 

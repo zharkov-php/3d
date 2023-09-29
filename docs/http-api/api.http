@@ -31,4 +31,6 @@ GET {{url}}/machine-status/1
 
 ###
 # @name get employee or machine history
-GET {{url}}/history/employee/1
+# param type = machines || employee
+# param id  = machines id || employee id
+GET {{url}}/history?type={{typeName}}&id={{typeId}}

@@ -3,25 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Http\Repositories\WorkHistoryRepository;
+use App\Http\Requests\GetHistoryRequest;
 use App\Http\Resources\WorkHistoryResourceCollection;
-use Illuminate\Http\JsonResponse;
+use App\Http\Services\WorkHistoryService;
 
 class WorkHistoryController extends Controller
 {
     private WorkHistoryRepository $workHistoryRepository;
+    private WorkHistoryService $workHistoryService;
 
-    public function __construct(WorkHistoryRepository $workHistoryRepository)
+    public function __construct(
+        WorkHistoryRepository $workHistoryRepository,
+        WorkHistoryService $workHistoryService,
+    )
     {
         $this->workHistoryRepository = $workHistoryRepository;
+        $this->workHistoryService = $workHistoryService;
     }
 
-    public function getHistory(string $type, int $id)
+    public function getHistory(GetHistoryRequest $request)
     {
-        if (!in_array($type, ['employee', 'machine'])) {
-            return response()->json(['message' => 'Invalid type'], 400);
-        }
-
-        $key = ($type === 'employee') ? 'employee_id' : 'machine_id';
+        $id = $request->input('id');
+        $key = $this->workHistoryService->determineKey($request->input('type'));
 
         return new WorkHistoryResourceCollection($this->workHistoryRepository->geHistory($key, $id));
     }
