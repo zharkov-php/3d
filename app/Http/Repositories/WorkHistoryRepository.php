@@ -22,4 +22,9 @@ class WorkHistoryRepository
             ->whereNull('ended_at')
             ->update(['ended_at' => now()]);
     }
+
+    public function geHistory(string $key, int $id)
+    {
+       return WorkHistory::where($key, $id)->paginate(10);
+    }
 }

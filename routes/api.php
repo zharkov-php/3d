@@ -3,6 +3,7 @@
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\MachineController;
 use App\Http\Controllers\WorkController;
+use App\Http\Controllers\WorkHistoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +31,6 @@ Route::post('/unassign/{employee}/{machine}', [WorkController::class, 'unassignM
 
 Route::get('/employee-status/{employee}', [EmployeeController::class, 'getEmployeeStatus']);
 Route::get('/machine-status/{machine}', [MachineController::class, 'getMachineStatus']);
+
+Route::get('/history/{type}/{id}', [WorkHistoryController::class, 'getHistory']);
+

@@ -2,64 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\WorkHistory;
-use Illuminate\Http\Request;
+use App\Http\Repositories\WorkHistoryRepository;
+use Illuminate\Http\JsonResponse;
 
 class WorkHistoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    private WorkHistoryRepository $workHistoryRepository;
+
+    public function __construct(WorkHistoryRepository $workHistoryRepository)
     {
-        //
+        $this->workHistoryRepository = $workHistoryRepository;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function getHistory(string $type, int $id): JsonResponse
     {
-        //
-    }
+        if (!in_array($type, ['employee', 'machine'])) {
+            return response()->json(['message' => 'Invalid type'], 400);
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $key = ($type === 'employee') ? 'employee_id' : 'machine_id';
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(WorkHistory $workHistory)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(WorkHistory $workHistory)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, WorkHistory $workHistory)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(WorkHistory $workHistory)
-    {
-        //
+        return $this->workHistoryRepository->geHistory($key, $id);
     }
 }
