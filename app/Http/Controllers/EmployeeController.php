@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Repositories\EmployeeRepository;
 use App\Http\Resources\EmployeeResourceCollection;
+use App\Http\Resources\EmployeeStatusResource;
 use App\Models\Employee;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -26,8 +27,8 @@ class EmployeeController extends Controller
         return new EmployeeResourceCollection($this->employeeRepository->all());
     }
 
-    public function getEmployeeStatus(Employee $employee): Model|Collection|Builder|array|null
+    public function getEmployeeStatus(Employee $employee): EmployeeStatusResource
     {
-        return $this->employeeRepository->getStatus($employee->id);
+        return new EmployeeStatusResource($this->employeeRepository->getStatus($employee->id));
     }
 }
