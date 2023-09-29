@@ -14,7 +14,7 @@ class WorkHistoryController extends Controller
         $this->workHistoryRepository = $workHistoryRepository;
     }
 
-    public function getHistory(string $type, int $id): JsonResponse
+    public function getHistory(string $type, int $id)
     {
         if (!in_array($type, ['employee', 'machine'])) {
             return response()->json(['message' => 'Invalid type'], 400);

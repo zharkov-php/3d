@@ -1,0 +1,34 @@
+# Artpix APi
+
+###
+# @name get all empoyess
+GET {{url}}/employees
+
+###
+# @name get all machines
+GET {{url}}/machines
+
+###
+# @name assign employee to machine
+POST {{url}}/assign/1/1
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+
+--WebAppBoundary
+
+###
+# @name unassign employee from machine
+POST {{url}}/unassign/1/1
+
+###
+# @name get employee status
+GET {{url}}/employee-status/1
+
+###
+# @name get machine status
+GET {{url}}/machine-status/1
+
+###
+# @name get employee or machine history
+GET {{url}}/history/employee/1
