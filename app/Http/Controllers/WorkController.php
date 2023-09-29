@@ -18,6 +18,10 @@ class WorkController extends Controller
 
     public function assignMachineToEmployee(Employee $employee, Machine $machine): JsonResponse
     {
+        if ($machine?->employees->isNotEmpty()) {
+            return response()->json(['message' => 'Machine is already assigned'], 400);
+        }
+
         if ($machine?->employees->isEmpty()) {
             $employee?->machines()->attach($machine->id);
             $this->workHistoryRepository->create($employee->id, $machine->id);
