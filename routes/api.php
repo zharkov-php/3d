@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\MachineController;
+use App\Http\Controllers\WorkController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,5 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/employees', [\App\Http\Controllers\EmployeeController::class, 'index']);
-Route::get('/machines', [\App\Http\Controllers\MachineController::class, 'index']);
+Route::get('/employees', [EmployeeController::class, 'index']);
+Route::get('/machines', [MachineController::class, 'index']);
+Route::post('/assign/{employee}/{machine}', [WorkController::class, 'assignMachineToEmployee']);
+Route::post('/unassign/{employee}/{machine}', [WorkController::class, 'unassignMachineFromEmployee']);
