@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('work_histories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('employee_id')->constrained();
+            $table->foreignId('machine_id')->constrained();
+            $table->timestamp('started_at');
+            $table->timestamp('ended_at')->nullable();
             $table->timestamps();
         });
     }

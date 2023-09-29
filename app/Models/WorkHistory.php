@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class WorkHistory extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['employee_id', 'machine_id', 'started_at', 'ended_at'];
+
 }
