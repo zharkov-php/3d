@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Repositories\MachineRepository;
+use App\Http\Resources\MachineResourceCollection;
 use App\Models\Machine;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -19,9 +20,9 @@ class MachineController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Collection
+    public function index(): MachineResourceCollection
     {
-        return $this->machineRepository->all();
+        return new MachineResourceCollection($this->machineRepository->all());
     }
 
     public function getMachineStatus(Machine $machine): Model|Collection|Builder|array
